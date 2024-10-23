@@ -1,6 +1,9 @@
-package dev.talles.CadastroDeNinjas;
+package dev.talles.CadastroDeNinjas.Ninjas;
 
+import dev.talles.CadastroDeNinjas.Missoes.MissaoModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_cadastro")
