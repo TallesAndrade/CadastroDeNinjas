@@ -14,8 +14,15 @@ public class NinjaModel {
     private Long id;
 
     private String nome;
+
     private String email;
+
     private int idade;
+
+    //@ManyToOne um ninja tem um missão
+    @ManyToOne
+    @JoinColumn(name = "missoes_id") //Foreing key ou  chave estrangeira
+    private MissaoModel missao;
 
     public NinjaModel(String nome, String email, int idade) {
         this.nome = nome;

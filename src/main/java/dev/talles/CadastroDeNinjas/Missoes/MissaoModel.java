@@ -3,14 +3,20 @@ package dev.talles.CadastroDeNinjas.Missoes;
 import dev.talles.CadastroDeNinjas.Ninjas.NinjaModel;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "td_missoes")
 public class MissaoModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private char rank;
+    //@OneToMany uma missão pra muitos ninjas
+    @OneToMany(mappedBy = "missao")
+    private List<NinjaModel> ninjas;
 
     public MissaoModel(Long id, String nome,char rank) {
         this.id = id;
