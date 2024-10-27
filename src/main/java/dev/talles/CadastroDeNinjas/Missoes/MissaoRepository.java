@@ -1,4 +1,6 @@
 package dev.talles.CadastroDeNinjas.Missoes;
 
-public class MissaoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MissaoRepository extends JpaRepository<MissaoModel,Long> {
 }
