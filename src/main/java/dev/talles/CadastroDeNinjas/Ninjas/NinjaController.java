@@ -3,7 +3,6 @@ package dev.talles.CadastroDeNinjas.Ninjas;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/ninjas")
@@ -23,8 +22,9 @@ public class NinjaController {
 
     //Add Ninja(CREATE)
     @PostMapping("/criar")
-    public String criarNinja(){
-        return "Ninja Criado";
+    public NinjaModel criarNinja(@RequestBody NinjaModel ninja){
+        return ninjaService.criarNinja(ninja);
+
     }
 
     //Mostar Ninjas (READ)
@@ -38,6 +38,8 @@ public class NinjaController {
     public NinjaModel ninjasPorId(@PathVariable Long id){
        return ninjaService.ninjasPorId(id);
     }
+
+
 
     //Alterar dados ninja(UPDATE)
     @PutMapping("/alterarID")
