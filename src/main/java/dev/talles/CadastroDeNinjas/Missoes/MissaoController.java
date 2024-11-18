@@ -1,6 +1,6 @@
 package dev.talles.CadastroDeNinjas.Missoes;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import dev.talles.CadastroDeNinjas.Ninjas.NinjaModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,8 +8,12 @@ import java.util.List;
 @RestController
 @RequestMapping("missoes")
 public class MissaoController {
-    @Autowired
+
     private MissaoService missaoService;
+
+    public MissaoController(MissaoService missaoService) {
+        this.missaoService = missaoService;
+    }
 
     //POST - mandar requisição pra criar missões
     @PostMapping("/criar")
@@ -24,14 +28,19 @@ public class MissaoController {
     }
 
     //PUT - mandar requisição pra alterar missões
-    @PutMapping("/alterar")
-    public String alterarMissao(){
-        return "Missao alterad com sucesso";
+    @PutMapping("/alterar/{id}")
+    public MissaoModel alterarMissao(@PathVariable Long id, @RequestBody MissaoModel missaoAtualizada){
+        return missaoService.alterarMissao(missaoAtualizada,id);
     }
 
     //DELETE - mandar requisição pra deletar missões
     @DeleteMapping("/deletar")
     public String deletarMissao(){
         return "Missao deletada";
+    }
+
+    @GetMapping("/listarNinjasMissao/{id}")
+    public List<NinjaModel> ninjasMissao(@PathVariable Long id){
+        return missaoService.ninjasMissao(id);
     }
 }
