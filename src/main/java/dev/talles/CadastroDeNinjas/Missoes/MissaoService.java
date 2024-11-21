@@ -40,6 +40,10 @@ public class MissaoService {
 
     }
 
+    public void deleterMissao(Long id){
+        missaoRepository.deleteById(id);
+    }
+
     public List<NinjaModel> ninjasMissao(Long id){
         MissaoModel missaoModel = missaoRepository.findById(id).orElseThrow();
 
