@@ -3,32 +3,43 @@ package dev.talles.CadastroDeNinjas.Ninjas;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class NinjaService {
 
     private NinjaRepository ninjaRepository;
-    
+    private NinjaMapper ninjaMapper;
 
-
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
-    }
-    public List<NinjaModel> listarNinjas(){
-        return ninjaRepository.findAll();
+        this.ninjaMapper = ninjaMapper;
     }
 
-    public NinjaModel ninjasPorId(Long id){
-        Optional<NinjaModel> ninjaModel = ninjaRepository.findById(id);
-        return ninjaModel.orElse(null);
+    public List<NinjaDTO> listarNinjas(){
+        List<NinjaModel> ninjaList = ninjaRepository.findAll();
+        List<NinjaDTO> ninjaDTOList = new ArrayList<>();
+        for (NinjaModel ninjaModel : ninjaList){
+            NinjaDTO ninjaDTO = ninjaMapper.map(ninjaModel);
+            ninjaDTOList.add(ninjaDTO);
+        }
+
+        return ninjaDTOList;
+
     }
 
-    public NinjaModel criarNinja(NinjaModel ninja){
+    public NinjaDTO ninjasPorId(Long id){
+        NinjaModel ninjaModel = ninjaRepository.findById(id).orElseThrow();
+        NinjaDTO ninjaDTO = ninjaMapper.map(ninjaModel);
 
-        return ninjaRepository.save(ninja);
+        return ninjaDTO;
+    }
+
+    public NinjaDTO criarNinja(NinjaDTO ninjaDTO) {
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
+        ninja = ninjaRepository.save(ninja);
+        return ninjaMapper.map(ninja);
     }
 
     public void deleterNinja(Long id){
