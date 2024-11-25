@@ -46,24 +46,26 @@ public class NinjaService {
         ninjaRepository.deleteById(id);
     }
 
-    public NinjaModel atulizarNinja(NinjaModel ninjaAtualizado , Long id){
+    public NinjaDTO atulizarNinja(NinjaDTO ninjaDTO  , Long id){
         NinjaModel ninjaExistente = ninjaRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException(id,"NinjaModel"));
-       if (ninjaAtualizado.getNome() != null){
-           ninjaExistente.setNome(ninjaAtualizado.getNome());
+                .orElseThrow();
+       if (ninjaDTO.getNome() != null){
+           ninjaExistente.setNome(ninjaDTO.getNome());
        }
-        if (ninjaAtualizado.getEmail() != null){
-            ninjaExistente.setEmail(ninjaAtualizado.getEmail());
+        if (ninjaDTO.getEmail() != null){
+            ninjaExistente.setEmail(ninjaDTO.getEmail());
         }
-        if (ninjaAtualizado.getIdade() != 0){
-            ninjaExistente.setIdade(ninjaAtualizado.getIdade());
+        if (ninjaDTO.getIdade() != 0){
+            ninjaExistente.setIdade(ninjaDTO.getIdade());
         }
-        if (ninjaAtualizado.getImgUrl() != null){
-            ninjaExistente.setImgUrl(ninjaAtualizado.getImgUrl());
+        if (ninjaDTO.getImgUrl() != null){
+            ninjaExistente.setImgUrl(ninjaDTO.getImgUrl());
         }
-        if (ninjaAtualizado.getMissao() != null ){
-            ninjaExistente.setMissao(ninjaAtualizado.getMissao());
+        if (ninjaDTO.getMissao() != null ){
+            ninjaExistente.setMissao(ninjaDTO.getMissao());
         }
-        return ninjaRepository.save(ninjaExistente) ;
+
+
+        return ninjaMapper.map(ninjaRepository.save(ninjaExistente)) ;
     }
 }
