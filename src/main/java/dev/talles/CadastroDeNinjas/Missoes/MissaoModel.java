@@ -21,6 +21,7 @@ public class MissaoModel {
     private Long id;
     private String nome;
     private char rank;
+    private boolean concluida;
     //@OneToMany uma missão pra muitos ninjas
     @OneToMany(mappedBy = "missao")
     @JsonIgnore

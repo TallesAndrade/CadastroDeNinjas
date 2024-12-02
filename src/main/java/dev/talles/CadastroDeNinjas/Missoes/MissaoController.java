@@ -1,5 +1,6 @@
 package dev.talles.CadastroDeNinjas.Missoes;
 
+import dev.talles.CadastroDeNinjas.Ninjas.NinjaDTO;
 import dev.talles.CadastroDeNinjas.Ninjas.NinjaModel;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,19 +18,19 @@ public class MissaoController {
 
     //POST - mandar requisição pra criar missões
     @PostMapping("/criar")
-    public MissaoModel criarMissao(@RequestBody MissaoModel missaoModel){
-        return missaoService.criarMissao(missaoModel);
+    public MissaoDTO criarMissao(@RequestBody MissaoDTO missaoDTO){
+        return missaoService.criarMissao(missaoDTO);
     }
 
     //GET - mandar requisição pra listar missões
     @GetMapping("/listar")
-    public List<MissaoModel> listarMissao(){
+    public List<MissaoDTO> listarMissao(){
         return missaoService.listarMissao();
     }
 
     //PUT - mandar requisição pra alterar missões
     @PutMapping("/alterar/{id}")
-    public MissaoModel alterarMissao(@PathVariable Long id, @RequestBody MissaoModel missaoAtualizada){
+    public MissaoDTO alterarMissao(@PathVariable Long id, @RequestBody MissaoDTO missaoAtualizada){
         return missaoService.alterarMissao(missaoAtualizada,id);
     }
 
@@ -40,7 +41,7 @@ public class MissaoController {
     }
 
     @GetMapping("/listarNinjasMissao/{id}")
-    public List<NinjaModel> ninjasMissao(@PathVariable Long id){
+    public List<NinjaDTO> ninjasMissao(@PathVariable Long id){
         return missaoService.ninjasMissao(id);
     }
 }
