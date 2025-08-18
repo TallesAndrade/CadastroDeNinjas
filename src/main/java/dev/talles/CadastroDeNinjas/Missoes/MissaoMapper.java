@@ -2,9 +2,12 @@ package dev.talles.CadastroDeNinjas.Missoes;
 import dev.talles.CadastroDeNinjas.Ninjas.NinjaDTO;
 import dev.talles.CadastroDeNinjas.Ninjas.NinjaMapper;
 import dev.talles.CadastroDeNinjas.Ninjas.NinjaModel;
+import org.springframework.context.annotation.Configuration;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Configuration
 public class MissaoMapper {
 
     private  NinjaMapper ninjaMapper;
